@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
 
 * {
   margin: 0;
@@ -15,21 +15,55 @@ body {
 }
 
 body,
-a {
+a,
+input,
+button {
   color: white;
-  text-shadow: 0px 0px 11px rgba(0, 0, 0, 1);
-  font-family: "Play", sans-serif;
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 1);
+  font-family: "Poppins", sans-serif;
 }
 
 /* TYPOGRAPHY */
 
 h1 {
-  font-size: 4rem;
+  font-size: 7rem;
 }
+
+h3 {
+  font-size: 3rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+p {
+  letter-spacing: 1px;
+}
+
+.temp,
+.task-name {
+  font-size: 1.5rem;
+}
+
+.mantra {
+  font-size: 2rem;
+}
+
+.focus label,
+.main-focus-form input,
+.focus-added {
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.todo-popup .close {
+  font-size: 1.5rem;
+}
+
+/* TYPOGRAPHY ENDS */
 
 .container {
   height: 100vh;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -42,7 +76,123 @@ h1 {
 }
 
 .main {
+  width: 50%;
+  align-self: center;
   text-align: center;
   display: flex;
   flex-direction: column;
 }
+
+.weather {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.city {
+  margin-top: -0.5rem;
+}
+
+/* Main focus */
+
+.focus {
+  margin-top: 3rem;
+  align-self: center;
+}
+
+.main-focus-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-focus-form input {
+  text-align: center;
+  background: none;
+  border: none;
+  border-bottom: 3px solid rgb(255, 255, 255);
+  outline: none;
+}
+
+.focus-added {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.focus-added i:hover {
+  color: green;
+  text-shadow: none;
+}
+
+/* TODO SECTION */
+
+.todo-link {
+  cursor: pointer;
+}
+
+.todo-popup {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  position: absolute;
+  right: 2%;
+  bottom: 7%;
+  min-height: 300px;
+  max-width: 400px;
+  padding: 15px 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.todo-popup .close {
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.add-todo {
+  text-align: center;
+}
+
+.add-todo button {
+  background-color: rgba(156, 215, 240, 0.5);
+  margin-top: 5px;
+  padding: 5px 1.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.todo-form input {
+  font-size: 1rem;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+input::placeholder {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* SINGLE TODO */
+
+.todo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 5px;
+}
+
+/* UTILS */
+
+.hidden {
+  display: none;
+}
+
+.hide {
+  opacity: 0;
+}
+
+/*  MOBILE SCREEN CSS */

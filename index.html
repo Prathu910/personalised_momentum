@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Momentum</title>
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/d587050d50.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="container">
@@ -24,13 +27,45 @@
       <div class="main">
         <h1 class="time"></h1>
         <div class="greetings">
-          <h3>Collects Moments, not things</h3>
+          <h3 class="greet">Good Morning, Prathamesh</h3>
+          <h3 class="mantra hidden"></h3>
+        </div>
+        <div class="focus">
+          <form class="main-focus-form">
+            <label for="main-focus">What is your main focus for today?</label>
+            <input type="text" id="main-focus" />
+          </form>
+          <div class="focus-added hidden">
+            <i class="fa-regular fa-circle-check"></i>
+            <p class="task-name"></p>
+          </div>
         </div>
       </div>
       <div class="footer">
         <p class="auhtor">AUTHOR</p>
-        <p>TO-DO</p>
+        <p class="quote">"You never lose. You either win or learn."</p>
+        <div class="todo-section">
+          <p class="todo-link">TO-DO</p>
+          <div class="todo-popup hidden">
+            <h3 class="close">X</h3>
+            <div class="add-todo">
+              <p>Add a todo to get started</p>
+              <button class="add">New Todo</button>
+            </div>
+            <div class="todos hidden"></div>
+            <form class="todo-form hide">
+              <input
+                type="text"
+                autocomplete="off"
+                placeholder="New Todo"
+                id="new-todo"
+              />
+              <input type="submit" class="hidden" />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
+    <script src="index.js" type="module"></script>
   </body>
 </html>
