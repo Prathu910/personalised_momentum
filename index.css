@@ -55,7 +55,9 @@ p {
   letter-spacing: 1px;
 }
 
-.todo-popup .close {
+.todo-popup .close,
+.close-links,
+.go-back {
   font-size: 1.5rem;
 }
 
@@ -132,13 +134,14 @@ p {
   cursor: pointer;
 }
 
-.todo-popup {
+.todo-popup,
+.links-popup .links-display,
+.links-popup .links-form-display {
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 20px;
   position: absolute;
-  right: 2%;
-  bottom: 7%;
   min-height: 300px;
+  min-width: 300px;
   max-width: 400px;
   padding: 15px 2rem;
   display: flex;
@@ -146,7 +149,14 @@ p {
   justify-content: space-between;
 }
 
-.todo-popup .close {
+.todo-popup {
+  right: 2%;
+  bottom: 7%;
+}
+
+.todo-popup .close,
+.close-links,
+.go-back {
   align-self: flex-end;
   cursor: pointer;
 }
@@ -155,7 +165,8 @@ p {
   text-align: center;
 }
 
-.add-todo button {
+.add-todo button,
+.btn {
   background-color: rgba(156, 215, 240, 0.5);
   margin-top: 5px;
   padding: 5px 1.5rem;
@@ -164,14 +175,16 @@ p {
   cursor: pointer;
 }
 
-.todo-form input {
+.todo-form input,
+.links-form-display input {
   font-size: 1rem;
   background: none;
   border: none;
   outline: none;
 }
 
-input::placeholder {
+input::placeholder,
+.links-form-display input::placeholder {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -185,6 +198,30 @@ input::placeholder {
   margin-bottom: 5px;
 }
 
+/* LINKS POPUP SECTION */
+
+.links-popup .links-display {
+  display: none;
+}
+
+.links-form-display input {
+  font-size: 1.8rem;
+  border-bottom: 1px solid white;
+}
+
+.links-form-display input::placeholder {
+  font-size: 1.3rem;
+}
+
+/* .links-popup .links-form-display {
+  display: none;
+} */
+
+/* .links-popup {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  position: absolute;
+} */
 /* UTILS */
 
 .hidden {

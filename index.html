@@ -14,7 +14,30 @@
     <div class="container">
       <div class="header">
         <div class="links">
-          <a href="#">Links</a>
+          <p>Links</p>
+          <div class="links-popup">
+            <div class="links-display">
+              <h3 class="close-links">X</h3>
+              <div class="main-body">
+                <div class="links hidden"></div>
+              </div>
+              <div class="submit-link">
+                <p>+ New Link</p>
+              </div>
+            </div>
+            <form class="links-form-display hidden">
+              <h3 class="go-back"><-</h3>
+              <div class="links-form">
+                <input type="text" placeholder="Chrome" id="links-name" />
+                <input
+                  type="text"
+                  placeholder="example.com"
+                  id="links-address"
+                />
+              </div>
+              <button type="submit" class="btn links-submit">Create</button>
+            </form>
+          </div>
         </div>
         <div class="weather">
           <p>icon</p>
@@ -50,7 +73,7 @@
             <h3 class="close">X</h3>
             <div class="add-todo">
               <p>Add a todo to get started</p>
-              <button class="add">New Todo</button>
+              <button class="add btn">New Todo</button>
             </div>
             <div class="todos hidden"></div>
             <form class="todo-form hide">
