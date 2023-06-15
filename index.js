@@ -14,6 +14,13 @@ const addTodoSection = document.querySelector(".add-todo");
 const addNewTodoInput = document.querySelector("#new-todo");
 const allTodosSection = document.querySelector(".todos");
 const todoLink = document.querySelector(".todo-link");
+const newLink = document.querySelector(".new-link");
+const linksDisplay = document.querySelector(".links-display");
+const linksForm = document.querySelector(".links-form-display");
+const goBack = document.querySelector(".go-back");
+const closeLinksPopup = document.querySelector(".close-links");
+const openPopup = document.querySelector(".open-popup");
+const linksDiv = document.querySelector(".all-links");
 
 // Get random background images for body.
 // document.body.style.backgroundImage =
@@ -93,5 +100,46 @@ todoForm.addEventListener("submit", (e) => {
       </div>
     `;
     addNewTodoInput.value = "";
+  }
+});
+
+// LINKS SECTION
+
+newLink.addEventListener("click", () => {
+  linksDisplay.style.display = "none";
+  linksForm.style.display = "flex";
+});
+
+goBack.addEventListener("click", () => {
+  linksForm.style.display = "none";
+  linksDisplay.style.display = "flex";
+});
+
+closeLinksPopup.addEventListener("click", () => {
+  linksDisplay.style.display = "none";
+});
+
+openPopup.addEventListener("click", () => {
+  if (linksDisplay.style.display === "none") {
+    linksDisplay.style.display = "flex";
+  } else {
+    linksDisplay.style.display = "none";
+  }
+});
+
+linksForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const linkName = document.querySelector("#links-name").value;
+  const linkAddress = document.querySelector("#links-address").value;
+
+  if (linkName && linkAddress) {
+    const newLinkEl = document.createElement("a");
+    newLinkEl.classList.add("individual-link");
+    newLinkEl.textContent = linkName;
+    newLinkEl.href = linkAddress;
+    linksDiv.appendChild(newLinkEl);
+    // Go back to the links popup
+    linksForm.style.display = "none";
+    linksDisplay.style.display = "flex";
   }
 });
