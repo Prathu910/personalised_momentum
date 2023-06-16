@@ -28,10 +28,16 @@
             <form class="links-form-display hidden">
               <h3 class="go-back"><-</h3>
               <div class="links-form">
-                <input type="text" placeholder="Chrome" id="links-name" />
+                <input
+                  type="text"
+                  placeholder="Chrome"
+                  id="links-name"
+                  autocomplete="off"
+                />
                 <input
                   type="text"
                   placeholder="example.com"
+                  autocomplete="off"
                   id="links-address"
                 />
               </div>
@@ -56,11 +62,14 @@
         <div class="focus">
           <form class="main-focus-form">
             <label for="main-focus">What is your main focus for today?</label>
-            <input type="text" id="main-focus" />
+            <input type="text" id="main-focus" autocomplete="off" />
           </form>
           <div class="focus-added hidden">
-            <i class="fa-regular fa-circle-check"></i>
-            <p class="task-name"></p>
+            <i class="fa-regular fa-circle-check check"></i>
+            <div class="task-name">
+              <p class="task"></p>
+              <i class="fa-regular fa-trash-can remove"></i>
+            </div>
           </div>
         </div>
       </div>

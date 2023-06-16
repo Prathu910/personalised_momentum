@@ -128,7 +128,19 @@ p {
   cursor: pointer;
 }
 
-.focus-added i:hover {
+.task-name {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.remove:hover,
+.individual-link i:hover,
+.todo-remove:hover {
+  color: red;
+}
+
+.focus-added .check:hover {
   color: green;
   text-shadow: none;
 }
@@ -237,6 +249,20 @@ input::placeholder,
   gap: 0.3rem;
 }
 
+.individual-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.individual-link a {
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+.individual-link i {
+  cursor: pointer;
+}
 /* UTILS */
 
 .hidden {

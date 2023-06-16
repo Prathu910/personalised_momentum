@@ -6,6 +6,8 @@ const author = document.querySelector(".auhtor");
 const mantra = document.querySelector(".mantra");
 const greet = document.querySelector(".greet");
 const focusForm = document.querySelector(".main-focus-form");
+const mainFocus = document.querySelector(".task-name");
+const focusSection = document.querySelector(".focus-added");
 const newTodoBtn = document.querySelector(".add");
 const todoPopup = document.querySelector(".todo-popup");
 const closeTodoPopup = document.querySelector(".close");
@@ -21,6 +23,7 @@ const goBack = document.querySelector(".go-back");
 const closeLinksPopup = document.querySelector(".close-links");
 const openPopup = document.querySelector(".open-popup");
 const linksDiv = document.querySelector(".all-links");
+const removeMainFocus = document.querySelector(".remove");
 
 // Get random background images for body.
 // document.body.style.backgroundImage =
@@ -59,17 +62,49 @@ getRandomQuote().then((res) => {
   mantra.textContent = res.content;
 });
 
+// ****** MAINFOCUS SECTION ******
+
+// Check if mainFocus is already there in localStorage or not.
+const mainFocusLocalStore = JSON.parse(localStorage.getItem("mainFocus"));
+if (mainFocusLocalStore) {
+  renderMainFocus(mainFocusLocalStore);
+}
+
+function renderMainFocus(task) {
+  focusSection.classList.remove("hidden");
+  focusForm.classList.add("hidden");
+  document.querySelector(".task").textContent = task;
+}
+
 // Display Main Focus Task for today
 focusForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const task = document.getElementById("main-focus").value;
   if (task) {
-    const focusSection = document.querySelector(".focus-added");
-    focusSection.classList.remove("hidden");
-    document.querySelector(".task-name").textContent = task;
-    focusForm.classList.add("hidden");
+    // Store it to localStorage.
+    localStorage.setItem("mainFocus", JSON.stringify(task));
+    document.getElementById("main-focus").value = "";
+    renderMainFocus(task);
   }
 });
+
+mainFocus.addEventListener("mouseenter", () => {
+  removeMainFocus.style.display = "block";
+});
+
+mainFocus.addEventListener("mouseleave", () => {
+  removeMainFocus.style.display = "none";
+});
+
+removeMainFocus.addEventListener("click", () => {
+  localStorage.removeItem("mainFocus");
+  focusSection.classList.add("hidden");
+  focusForm.classList.remove("hidden");
+});
+
+// ****** MAINFOCUS SECTION ENDS ******
+
+// ****** TO-DO SECTION ******
 
 // OPEN Todo Popup
 todoLink.addEventListener("click", () => {
@@ -87,24 +122,59 @@ newTodoBtn.addEventListener("click", () => {
   addTodoSection.classList.add("hidden");
 });
 
+let availableTodos = JSON.parse(localStorage.getItem("todos")) ?? [];
+if (availableTodos.length > 0) {
+  todoForm.classList.remove("hide");
+  addTodoSection.classList.add("hidden");
+  renderTodo(availableTodos);
+}
+
+function renderTodo(todos) {
+  let todoHtml = "";
+  for (const todo of todos) {
+    const { id, task } = todo;
+    todoHtml += `
+      <div class="todo">
+        <i class="fa-regular fa-circle-check"></i>
+        <p>${task}</p>
+        <i class="fa-regular fa-trash-can todo-remove" data-todoID=${id}></i>
+      </div>
+    `;
+  }
+
+  allTodosSection.innerHTML = todoHtml;
+  const removeTodo = document.querySelectorAll(".todo-remove");
+  removeTodo.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const removeID = e.target.dataset.todoid;
+      availableTodos = availableTodos.filter((todo) => {
+        return todo.id !== removeID;
+      });
+      localStorage.setItem("todos", JSON.stringify(availableTodos));
+      renderTodo(availableTodos);
+    });
+  });
+  allTodosSection.classList.remove("hidden");
+}
 // Adding new todo.
 todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const newTodo = addNewTodoInput.value;
   if (newTodo) {
-    allTodosSection.classList.remove("hidden");
-    allTodosSection.innerHTML += `
-      <div class="todo">
-        <i class="fa-regular fa-circle-check"></i>
-        <p>${newTodo}</p>
-      </div>
-    `;
+    const todoId = new Date().getTime().toString();
+    availableTodos.push({ id: todoId, task: newTodo });
+
+    localStorage.setItem("todos", JSON.stringify(availableTodos));
+    renderTodo(availableTodos);
     addNewTodoInput.value = "";
   }
 });
 
-// LINKS SECTION
+// ****** TO-DO SECTION ENDS ******
 
+// ****** LINKS SECTION ******
+
+// LINKS SECTION
 newLink.addEventListener("click", () => {
   linksDisplay.style.display = "none";
   linksForm.style.display = "flex";
@@ -127,19 +197,53 @@ openPopup.addEventListener("click", () => {
   }
 });
 
+let availableLinks = JSON.parse(localStorage.getItem("links")) ?? [];
+if (availableLinks.length > 0) {
+  renderLinks(availableLinks);
+  linksDisplay.style.display = "none";
+}
+function renderLinks(links) {
+  let linkHtml = "";
+  links.forEach((link) => {
+    const { id, name, address } = link;
+    linkHtml += `
+    <div class="individual-link">
+      <i class="fa-solid fa-link"></i>
+      <a href="${address}">${name}</a>
+      <i class="fa-regular fa-trash-can link-remove" data-linkID=${id}></i>
+    </div>
+    `;
+  });
+  linksDiv.innerHTML = linkHtml;
+  // Go back to the links popup
+  linksForm.style.display = "none";
+  linksDisplay.style.display = "flex";
+
+  document.querySelectorAll(".link-remove").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const removeID = e.target.dataset.linkid;
+      availableLinks = availableLinks.filter((link) => {
+        return link.id !== removeID;
+      });
+      localStorage.setItem("links", JSON.stringify(availableLinks));
+      renderLinks(availableLinks);
+    });
+  });
+}
+
 linksForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const linkName = document.querySelector("#links-name").value;
   const linkAddress = document.querySelector("#links-address").value;
 
   if (linkName && linkAddress) {
-    const newLinkEl = document.createElement("a");
-    newLinkEl.classList.add("individual-link");
-    newLinkEl.textContent = linkName;
-    newLinkEl.href = linkAddress;
-    linksDiv.appendChild(newLinkEl);
-    // Go back to the links popup
-    linksForm.style.display = "none";
-    linksDisplay.style.display = "flex";
+    const linkId = new Date().getTime().toString();
+    availableLinks.push({ id: linkId, name: linkName, address: linkAddress });
+    localStorage.setItem("links", JSON.stringify(availableLinks));
+    document.querySelector("#links-name").value = "";
+    document.querySelector("#links-address").value = "";
+    renderLinks(availableLinks);
   }
 });
+
+// ****** LINKS SECTION ENDS ******
